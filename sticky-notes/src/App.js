@@ -1,12 +1,13 @@
+import { ThemeProvider } from "@emotion/react";
+import theme from "@rebass/preset";
 import { Routes } from "./Routes";
-import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
+    <ThemeProvider theme={theme}>
       <Routes />
-    </div>
+    </ThemeProvider>
   );
 }
 
