@@ -1,5 +1,5 @@
 import React from "react";
-import { NoteArea } from "./components/NoteArea";
+import NoteArea from "./components/NoteArea";
 
 import {
   BrowserRouter as Router,
