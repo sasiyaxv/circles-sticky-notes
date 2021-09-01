@@ -5,6 +5,7 @@ import {
 } from "../actions/actionTypes";
 
 const initialNote = {
+  noteId: null,
   noteHeader: null,
   noteValue: null,
 };
@@ -16,6 +17,7 @@ export function addNoteReducer(state = initialNote, action) {
         ...state,
         noteHeader: action.payload.noteHeader,
         noteValue: action.payload.noteValue,
+        noteId: action.payload.noteId,
       };
     default:
       return state;

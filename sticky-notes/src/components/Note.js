@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button } from "rebass";
-import { Input } from "@rebass/forms";
+import { Input, Textarea } from "@rebass/forms";
 import { RebassHeading } from "./RebassHeading";
 
 export const Note = () => {
+  const [noteId, setNoteId] = useState("");
+  const [noteHeader, setNoteHeader] = useState("");
+  const [noteValue, setNoteValue] = useState("");
   return (
     <Box
       sx={{
@@ -21,8 +24,13 @@ export const Note = () => {
           marginBottom: 3,
           marginTop: 2,
         }}
+        value={noteHeader}
+        onChange={(e) => setNoteHeader(e.target.value)}
       />
-      <textarea></textarea>
+      <Textarea
+        value={noteValue}
+        onChange={(e) => setNoteValue(e.target.value)}
+      ></Textarea>
       <br />
       <Button
         sx={{
