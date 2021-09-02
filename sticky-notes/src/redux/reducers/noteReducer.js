@@ -14,8 +14,10 @@ export function addNoteReducer(state = initialState, action) {
         ...state,
         [id, action.payload.noteHeader, action.payload.noteValue],
       ];
+    case EDIT_NOTE_ACTION:
+      return [];
     case DELETE_NOTE_ACTION:
-      return state.filter((note) => note.id !== action.id);
+      return [state.filter((payload) => payload.noteId !== payload.noteId)];
     default:
       return state;
   }

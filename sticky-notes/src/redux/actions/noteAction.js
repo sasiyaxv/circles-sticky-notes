@@ -25,9 +25,9 @@ export function updateNote(noteId, noteHeader, note) {
   };
 }
 
-export function deleteNote() {
+export function deleteNote(noteId) {
   return {
     type: DELETE_NOTE_ACTION,
-    payload: {},
+    payload: { noteId },
   };
 }
