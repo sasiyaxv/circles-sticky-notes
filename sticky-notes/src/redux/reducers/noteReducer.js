@@ -4,21 +4,18 @@ import {
   DELETE_NOTE_ACTION,
 } from "../actions/actionTypes";
 
-const initialNote = {
-  noteId: null,
-  noteHeader: null,
-  noteValue: null,
-};
+const initialState = [];
 
-export function addNoteReducer(state = initialNote, action) {
+export function addNoteReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_NOTE_ACTION:
-      return {
+      const id = Math.random().toString(36).substr(2, 9);
+      return [
         ...state,
-        noteHeader: action.payload.noteHeader,
-        noteValue: action.payload.noteValue,
-        noteId: action.payload.noteId,
-      };
+        [id, action.payload.noteHeader, action.payload.noteValue],
+      ];
+    case DELETE_NOTE_ACTION:
+      return state.filter((note) => note.id !== action.id);
     default:
       return state;
   }

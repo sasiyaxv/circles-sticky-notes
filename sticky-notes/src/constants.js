@@ -7,6 +7,7 @@ export const ROUTES = {
 export const API_PATHS = {
   APP_SETTINGS: "/app-settings",
   ADD_NOTE: "/addnote",
+  ADD_EMPTY_NOTE: "/addemptynote",
   EDIT_NOTE: "/editnote",
   DELETE_NOTE: "/deletenote",
 };

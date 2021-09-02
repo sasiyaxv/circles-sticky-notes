@@ -7,7 +7,7 @@ import {
   DELETE_NOTE_ACTION,
   DELETE_NOTE_ACTION_SUCCESS,
 } from "./actions/actionTypes";
-import { createNote, editNote, deleteNote } from "../fetchApi";
+import { createNote, editNote, deleteNote, createEmptyNote } from "../fetchApi";
 
 export function* addNoteSaga({ payload }) {
   try {

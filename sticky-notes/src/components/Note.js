@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { Box, Button } from "rebass";
 import { Input, Textarea } from "@rebass/forms";
-import { RebassHeading } from "./RebassHeading";
 import { connect } from "react-redux";
-import { addNote, editNote, deleteNote } from "../redux/actions";
+
+import { RebassLabel } from "./RebassLabel";
+import { addNote } from "../redux/actions";
 
 const Note = (props) => {
-  // const { noteHeader, noteId, noteValue } = props;
-  const [noteId, setNoteId] = useState("");
+  const { addNewNote } = props;
   const [noteHeader, setNoteHeader] = useState("");
   const [noteValue, setNoteValue] = useState("");
+
+  function saveClicked(e) {
+    e.preventDefault();
+    addNewNote(noteHeader, noteValue);
+  }
 
   return (
     <Box
@@ -20,6 +25,7 @@ const Note = (props) => {
         marginBottom: 3,
       }}
     >
+      <RebassLabel value="Title" />
       <Input
         sx={{
           borderWidth: "1px",
@@ -31,11 +37,22 @@ const Note = (props) => {
         value={noteHeader}
         onChange={(e) => setNoteHeader(e.target.value)}
       />
+      <RebassLabel value="Note" />
       <Textarea
         value={noteValue}
         onChange={(e) => setNoteValue(e.target.value)}
       ></Textarea>
       <br />
+      <Button
+        onClick={saveClicked}
+        sx={{
+          fontSize: 1,
+          background: "black",
+          margin: 1,
+        }}
+      >
+        Add note
+      </Button>
       <Button
         sx={{
           fontSize: 1,
@@ -43,7 +60,7 @@ const Note = (props) => {
           margin: 1,
         }}
       >
-        Save
+        Edit note
       </Button>
       <Button
         sx={{
@@ -59,18 +76,14 @@ const Note = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    noteId: state.note.noteId,
-    noteHeader: state.note.noteHeader,
-    noteValue: state.note.noteValue,
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // addNewNote: (noteId, noteHeader, noteValue) => {
-    //   dispatch(addNote(noteId, noteHeader, noteValue));
-    // },
+    addNewNote: (noteHeader, noteValue) => {
+      dispatch(addNote(noteHeader, noteValue));
+    },
   };
 };
 

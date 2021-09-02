@@ -4,13 +4,12 @@ import {
   DELETE_NOTE_ACTION,
 } from "./actionTypes";
 
-export function addNote(noteId, noteHeader, note) {
+export function addNote(noteHeader, noteValue) {
   return {
     type: ADD_NOTE_ACTION,
     payload: {
-      noteId,
       noteHeader,
-      note,
+      noteValue,
     },
   };
 }

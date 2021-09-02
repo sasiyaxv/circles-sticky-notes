@@ -8,17 +8,19 @@ import { addNote, editNote, deleteNote } from "../redux/actions";
 const NoteArea = (props) => {
   const [noteArea, setNoteArea] = useState([]);
 
-  const { addNewNote } = props;
-
   function addBtnClicked(e) {
     e.preventDefault();
     setNoteArea(noteArea.concat(<Note />));
-    // addNewNote();
   }
 
   return (
     <Box>
-      <RebassHeading value={"Take a Note"} />
+      <RebassHeading
+        value={"Add your Notes"}
+        marginBottom={[2, 3, 4]}
+        fontSize={[5, 6, 7]}
+      />
+      <Note />
       {noteArea}
       <Button
         onClick={addBtnClicked}
@@ -36,11 +38,7 @@ const NoteArea = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    // noteId: state.note.noteId,
-    // noteHeader: state.note.noteHeader,
-    // noteValue: state.note.noteValue,
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {

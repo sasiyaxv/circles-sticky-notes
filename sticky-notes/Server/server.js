@@ -28,6 +28,18 @@ app.post("/addnote", function (req, res) {
   });
 });
 
+app.post("/addemptynote", function (req, res) {
+  const noteId = req.body.noteId;
+  const noteHeader = req.body.noteHeader;
+  const noteValue = req.body.noteValue;
+
+  res.json({
+    noteId: noteId,
+    noteHeader: noteHeader,
+    noteValue: noteValue,
+  });
+});
+
 app.post("/editnote", function (req, res) {
   const noteId = req.body.noteId;
   const noteHeader = req.body.noteHeader;

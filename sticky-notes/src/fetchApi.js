@@ -2,6 +2,21 @@ import { API_PATHS, BASE_URL } from "./constants";
 
 const axios = require("axios");
 
+export const createEmptyNote = (noteId, noteHeader, noteValue) => {
+  return axios
+    .post(BASE_URL + API_PATHS.ADD_EMPTY_NOTE, {
+      noteId: noteId,
+      noteHeader: noteHeader,
+      noteValue: noteValue,
+    })
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
 export const createNote = (noteId, noteHeader, noteValue) => {
   return axios
     .post(BASE_URL + API_PATHS.ADD_NOTE, {
