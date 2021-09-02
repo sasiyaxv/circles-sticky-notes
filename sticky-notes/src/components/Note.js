@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import { Box, Button } from "rebass";
 import { Input, Textarea } from "@rebass/forms";
 import { RebassHeading } from "./RebassHeading";
+import { connect } from "react-redux";
+import { addNote, editNote, deleteNote } from "../redux/actions";
 
-export const Note = () => {
+const Note = (props) => {
+  // const { noteHeader, noteId, noteValue } = props;
   const [noteId, setNoteId] = useState("");
   const [noteHeader, setNoteHeader] = useState("");
   const [noteValue, setNoteValue] = useState("");
+
   return (
     <Box
       sx={{
@@ -39,7 +43,7 @@ export const Note = () => {
           margin: 1,
         }}
       >
-        Edit
+        Save
       </Button>
       <Button
         sx={{
@@ -53,3 +57,21 @@ export const Note = () => {
     </Box>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    noteId: state.note.noteId,
+    noteHeader: state.note.noteHeader,
+    noteValue: state.note.noteValue,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // addNewNote: (noteId, noteHeader, noteValue) => {
+    //   dispatch(addNote(noteId, noteHeader, noteValue));
+    // },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Note);

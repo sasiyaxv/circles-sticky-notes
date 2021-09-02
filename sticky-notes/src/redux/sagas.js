@@ -7,14 +7,41 @@ import {
   DELETE_NOTE_ACTION,
   DELETE_NOTE_ACTION_SUCCESS,
 } from "./actions/actionTypes";
+import { createNote, editNote, deleteNote } from "../fetchApi";
 
-export function* addNote({ payload, callback }) {
+export function* addNoteSaga({ payload }) {
   try {
-  } catch (e) {
-    yield put({ type: ADD_NOTE_ACTION_SUCCESS, message: e.message });
-  }
+    const note = yield call(
+      createNote,
+      payload.noteId,
+      payload.noteHeader,
+      payload.noteValue
+    );
+    yield put({ type: ADD_NOTE_ACTION_SUCCESS, payload: note });
+  } catch (e) {}
+}
+
+export function* editNoteSaga({ payload }) {
+  try {
+    const note = yield call(
+      editNote,
+      payload.noteId,
+      payload.noteHeader,
+      payload.noteValue
+    );
+    yield put({ type: EDIT_NOTE_ACTION_SUCCESS, payload: note });
+  } catch (e) {}
+}
+
+export function* deleteNoteSaga({ payload }) {
+  try {
+    const note = yield call(deleteNote, payload.noteId);
+    yield put({ type: DELETE_NOTE_ACTION_SUCCESS, payload: note });
+  } catch (e) {}
 }
 
 export function* mySaga() {
-  yield takeLatest(ADD_NOTE_ACTION, addNote);
+  yield takeLatest(ADD_NOTE_ACTION, addNoteSaga);
+  yield takeLatest(EDIT_NOTE_ACTION, editNoteSaga);
+  yield takeLatest(DELETE_NOTE_ACTION, deleteNoteSaga);
 }

@@ -1,20 +1,27 @@
 import React, { useState } from "react";
 import { Box, Button } from "rebass";
-import { Note } from "./Note";
+import Note from "./Note";
 import { RebassHeading } from "./RebassHeading";
 import { connect } from "react-redux";
+import { addNote, editNote, deleteNote } from "../redux/actions";
 
 const NoteArea = (props) => {
   const [noteArea, setNoteArea] = useState([]);
 
-  const { noteHeader } = props;
+  const { addNewNote } = props;
+
+  function addBtnClicked(e) {
+    e.preventDefault();
+    setNoteArea(noteArea.concat(<Note />));
+    // addNewNote();
+  }
 
   return (
     <Box>
       <RebassHeading value={"Take a Note"} />
       {noteArea}
       <Button
-        onClick={() => setNoteArea(noteArea.concat(<Note />))}
+        onClick={addBtnClicked}
         sx={{
           fontSize: 1,
           background: "black",
@@ -30,17 +37,17 @@ const NoteArea = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    // noteHeader: note.noteHeader,
-    // noteValue:note.noteValue
+    // noteId: state.note.noteId,
+    // noteHeader: state.note.noteHeader,
+    // noteValue: state.note.noteValue,
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    // addNote: (noteHeader, noteValue) => {
-    //   dispatch(
-    //   );
-    // },
+    addNewNote: (noteId, noteHeader, noteValue) => {
+      dispatch(addNote(noteId, noteHeader, noteValue));
+    },
   };
 };
 
