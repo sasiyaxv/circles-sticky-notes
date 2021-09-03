@@ -7,28 +7,16 @@ const app = express();
 app.use(cors(), express.urlencoded({ extended: false }));
 
 // CDD
-// app.get("/appsettings", async (req, res) => {
-//   await sleep(1000);
-//   res.json({
-//     noteBoard: {
-//       mainHeader: " Ready to Take a Challenge",
-//     },
-//   });
-// });
-
-app.post("/addnote", function (req, res) {
-  const noteId = req.body.noteId;
-  const noteHeader = req.body.noteHeader;
-  const noteValue = req.body.noteValue;
-
+app.get("/appsettings", async (req, res) => {
+  await sleep(1000);
   res.json({
-    noteId: noteId,
-    noteHeader: noteHeader,
-    noteValue: noteValue,
+    noteBoard: {
+      mainHeader: "Add your notes",
+    },
   });
 });
 
-app.post("/addemptynote", function (req, res) {
+app.post("/addnote", function (req, res) {
   const noteId = req.body.noteId;
   const noteHeader = req.body.noteHeader;
   const noteValue = req.body.noteValue;

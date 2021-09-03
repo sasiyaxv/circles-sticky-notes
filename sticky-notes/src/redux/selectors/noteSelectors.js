@@ -14,3 +14,8 @@ export const selectNoteValue = createSelector(
   (state) => state.note?.noteValue,
   (noteValue) => noteValue
 );
+
+export const selectMainHeader = createSelector(
+  (state) => state?.settings?.mainHeader,
+  (mainHeader) => mainHeader
+);

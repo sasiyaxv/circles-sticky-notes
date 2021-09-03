@@ -6,8 +6,27 @@ import {
   EDIT_NOTE_ACTION_SUCCESS,
   DELETE_NOTE_ACTION,
   DELETE_NOTE_ACTION_SUCCESS,
+  GET_SETTINGS_ACTION,
+  GET_SETTINGS_ACTION_SUCCESS,
+  GET_SETTINGS_ACTION_FAIL,
 } from "./actions/actionTypes";
-import { createNote, editNote, deleteNote, createEmptyNote } from "../fetchApi";
+import {
+  createNote,
+  editNote,
+  deleteNote,
+  fetchSettingsData,
+} from "../fetchApi";
+
+export function* getSettingsSaga() {
+  try {
+    const dataObj = yield call(fetchSettingsData);
+    if (dataObj.mainHeader === "") {
+      yield put({ type: GET_SETTINGS_ACTION_FAIL, payload: dataObj });
+    } else {
+      yield put({ type: GET_SETTINGS_ACTION_SUCCESS, payload: dataObj });
+    }
+  } catch (e) {}
+}
 
 export function* addNoteSaga({ payload }) {
   try {
@@ -41,6 +60,7 @@ export function* deleteNoteSaga({ payload }) {
 }
 
 export function* mySaga() {
+  yield takeLatest(GET_SETTINGS_ACTION, getSettingsSaga);
   yield takeLatest(ADD_NOTE_ACTION, addNoteSaga);
   yield takeLatest(EDIT_NOTE_ACTION, editNoteSaga);
   yield takeLatest(DELETE_NOTE_ACTION, deleteNoteSaga);

@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button } from "rebass";
 import Note from "./Note";
 import { RebassHeading } from "./RebassHeading";
 import { connect } from "react-redux";
-import { addNote, editNote, deleteNote } from "../redux/actions";
+import {
+  addNote,
+  editNote,
+  deleteNote,
+  getDataConfigAction,
+} from "../redux/actions";
+import { selectMainHeader } from "../redux/selectors/noteSelectors";
 
 const NoteArea = (props) => {
+  const { mainHeader, getNoteData, isLoading } = props;
+
   const [noteArea, setNoteArea] = useState([]);
 
   function addBtnClicked(e) {
@@ -13,13 +21,25 @@ const NoteArea = (props) => {
     setNoteArea(noteArea.concat(<Note />));
   }
 
+  // fetch initial data
+  useEffect(() => {
+    getNoteData();
+  }, []);
+
   return (
     <Box>
-      <RebassHeading
-        value={"Add your Notes"}
-        marginBottom={[2, 3, 4]}
-        fontSize={[5, 6, 7]}
-      />
+      {!isLoading ? (
+        <>
+          <RebassHeading
+            value={"Add your Notes"}
+            marginBottom={[2, 3, 4]}
+            fontSize={[5, 6, 7]}
+          />
+        </>
+      ) : (
+        "loading..."
+      )}
+
       <Note />
       {noteArea}
       <Button
@@ -38,13 +58,19 @@ const NoteArea = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    mainHeader: selectMainHeader(state),
+    isLoading: state.settings.isLoading,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewNote: (noteId, noteHeader, noteValue) => {
       dispatch(addNote(noteId, noteHeader, noteValue));
+    },
+    getNoteData: () => {
+      dispatch(getDataConfigAction(() => {}));
     },
   };
 };

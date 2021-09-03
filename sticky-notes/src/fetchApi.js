@@ -2,18 +2,18 @@ import { API_PATHS, BASE_URL } from "./constants";
 
 const axios = require("axios");
 
-export const createEmptyNote = (noteId, noteHeader, noteValue) => {
+export const fetchSettingsData = () => {
   return axios
-    .post(BASE_URL + API_PATHS.ADD_EMPTY_NOTE, {
-      noteId: noteId,
-      noteHeader: noteHeader,
-      noteValue: noteValue,
-    })
+    .get(BASE_URL + API_PATHS.APP_SETTINGS, {})
     .then(function (response) {
-      return response.data;
+      return {
+        mainHeader: response.data.noteBoard.mainHeader,
+      };
     })
     .catch(function (error) {
-      console.log(error);
+      return {
+        mainHeader: "",
+      };
     });
 };
 

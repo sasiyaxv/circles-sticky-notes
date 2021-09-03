@@ -11,8 +11,6 @@ const Note = (props) => {
   const [noteHeader, setNoteHeader] = useState("");
   const [noteValue, setNoteValue] = useState("");
 
-  console.log("PROPS", props);
-
   function saveClicked(e) {
     e.preventDefault();
     addNewNote(noteHeader, noteValue);
@@ -32,7 +30,7 @@ const Note = (props) => {
         borderStyle: "solid",
         borderColor: "black",
         marginBottom: 3,
-        backgroundColor: "lightblue",
+        backgroundColor: "#C8C6C6",
       }}
     >
       <RebassLabel value="Title" marginBottom={[2, 3, 4]} />
