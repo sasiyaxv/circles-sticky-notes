@@ -44,15 +44,10 @@ export function addNoteReducer(state = initialState, action) {
     case EDIT_NOTE_ACTION:
       return [];
     case DELETE_NOTE_ACTION:
-      // const removeId = action.payload;
-      return [
-        ...state,
-        state.filter((payload) => payload.noteId !== payload.noteId),
-      ];
-    // return {
-    //   ...state,
-    //   notes: state.notes.filter((item) => item.removeId !== removeId),
-    // };
+      // const removeId = payload.noteId;
+      // console.log(payload);
+      return state.filter((notes) => notes.noteId !== action.noteId);
+
     default:
       return state;
   }

@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 
 import { RebassLabel } from "./RebassLabel";
 import { addNote, deleteNote, updateNote } from "../redux/actions";
-import { AddedNote } from "./AddedNote";
 
 const Note = (props) => {
   console.log("PROPS", props);
@@ -18,12 +17,12 @@ const Note = (props) => {
     props.addNewNote(noteHeader, noteValue);
   }
 
-  function deleteClicked(e) {
-    e.preventDefault();
-    setNoteHeader("");
-    setNoteValue("");
-    props.deleteNote(props.noteId);
-  }
+  // function deleteClicked(e) {
+  //   e.preventDefault();
+  //   setNoteHeader("");
+  //   setNoteValue("");
+  //   props.deleteNote(props.noteId);
+  // }
 
   return (
     <Box
@@ -74,7 +73,7 @@ const Note = (props) => {
       >
         Edit note
       </Button>
-      <Button
+      {/* <Button
         onClick={deleteClicked}
         sx={{
           fontSize: 1,
@@ -83,7 +82,7 @@ const Note = (props) => {
         }}
       >
         Delete
-      </Button>
+      </Button> */}
     </Box>
   );
 };

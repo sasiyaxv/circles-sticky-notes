@@ -12,6 +12,7 @@ import {
 } from "../redux/actions";
 import { selectMainHeader } from "../redux/selectors/noteSelectors";
 import { AddedNote } from "./AddedNote";
+import NoteList from "./NoteList";
 
 const NoteArea = (props) => {
   const { mainHeader, getNoteData, isLoading, notes, addEmpty, deleteThis } =
@@ -31,8 +32,8 @@ const NoteArea = (props) => {
     setNoteArea(noteArea.concat(<Note />));
   }
 
-  function deleteBtnClicked() {
-    // deleteThis(noteId);
+  function deleteBtnClicked(noteId) {
+    deleteThis(noteId);
   }
 
   // fetch initial data
@@ -66,22 +67,18 @@ const NoteArea = (props) => {
         />;
       })} */}
 
-      <ul>
+      <NoteList />
+
+      {/* <ul>
         {notes.map((note) => {
           return (
             <li>
-              {note.noteHeader} {note.noteValue}{" "}
-              <button
-                onClick={() => {
-                  deleteThis(note.noteId);
-                }}
-              >
-                delete
-              </button>
+              {note.noteHeader} {note.noteValue}
+              <button onClick={deleteBtnClicked}>delete</button>
             </li>
           );
         })}
-      </ul>
+      </ul> */}
 
       {/* <Button
         onClick={addBtnClicked}

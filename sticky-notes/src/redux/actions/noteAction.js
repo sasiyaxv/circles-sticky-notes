@@ -40,9 +40,10 @@ export function updateNote(noteId, noteHeader, note) {
 }
 
 export function deleteNote(noteId) {
+  console.log("NOTEID", noteId);
   return {
     type: DELETE_NOTE_ACTION,
-    payload: { noteId },
+    noteId,
   };
 }
 
