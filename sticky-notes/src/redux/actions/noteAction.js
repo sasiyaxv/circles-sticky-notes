@@ -5,7 +5,18 @@ import {
   GET_SETTINGS_ACTION,
   GET_SETTINGS_ACTION_SUCCESS,
   GET_SETTINGS_ACTION_FAIL,
+  ADD_EMPTY_NOTE_ACTION,
+  ADD_NOTE_ACTION_SUCCESS,
 } from "./actionTypes";
+
+export function addEmptyNote(noteId) {
+  return {
+    type: ADD_EMPTY_NOTE_ACTION,
+    payload: {
+      noteId,
+    },
+  };
+}
 
 export function addNote(noteHeader, noteValue) {
   return {

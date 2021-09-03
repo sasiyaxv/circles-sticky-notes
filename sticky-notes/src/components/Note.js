@@ -5,22 +5,24 @@ import { connect } from "react-redux";
 
 import { RebassLabel } from "./RebassLabel";
 import { addNote, deleteNote, updateNote } from "../redux/actions";
+import { AddedNote } from "./AddedNote";
 
 const Note = (props) => {
-  const { addNewNote, deleteNote, noteId } = props;
+  console.log("PROPS", props);
+  // const { addNewNote, deleteNote, noteId } = props;
   const [noteHeader, setNoteHeader] = useState("");
   const [noteValue, setNoteValue] = useState("");
 
   function saveClicked(e) {
     e.preventDefault();
-    addNewNote(noteHeader, noteValue);
+    props.addNewNote(noteHeader, noteValue);
   }
 
   function deleteClicked(e) {
     e.preventDefault();
     setNoteHeader("");
     setNoteValue("");
-    deleteNote(noteId);
+    props.deleteNote(props.noteId);
   }
 
   return (
@@ -34,6 +36,8 @@ const Note = (props) => {
       }}
     >
       <RebassLabel value="Title" marginBottom={[2, 3, 4]} />
+      <label value={props.noteId} />
+
       <Input
         sx={{
           borderWidth: "1px",
@@ -59,7 +63,7 @@ const Note = (props) => {
           margin: 1,
         }}
       >
-        Add note
+        Save note
       </Button>
       <Button
         sx={{
@@ -92,12 +96,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addNewNote: (noteHeader, noteValue) => {
-      dispatch(addNote(noteHeader, noteValue));
+    addNewNote: (noteId, noteHeader, noteValue) => {
+      dispatch(addNote(noteId, noteHeader, noteValue));
     },
-    deleteNote: (noteId) => {
-      dispatch(deleteNote(noteId));
-    },
+    // deleteNote: (noteId) => {
+    //   dispatch(deleteNote(noteId));
+    // },
     editNote: (noteId, noteHeader, noteValue) => {
       dispatch(updateNote(noteId, noteHeader, noteValue));
     },

@@ -8,11 +8,16 @@ import {
   editNote,
   deleteNote,
   getDataConfigAction,
+  addEmptyNote,
 } from "../redux/actions";
 import { selectMainHeader } from "../redux/selectors/noteSelectors";
+import { AddedNote } from "./AddedNote";
 
 const NoteArea = (props) => {
-  const { mainHeader, getNoteData, isLoading } = props;
+  const { mainHeader, getNoteData, isLoading, notes, addEmpty, deleteThis } =
+    props;
+
+  console.log("NOTES", notes);
 
   const [noteArea, setNoteArea] = useState([]);
 
@@ -22,7 +27,12 @@ const NoteArea = (props) => {
 
   function addBtnClicked(e) {
     e.preventDefault();
+    addEmpty();
     setNoteArea(noteArea.concat(<Note />));
+  }
+
+  function deleteBtnClicked() {
+    // deleteThis(noteId);
   }
 
   // fetch initial data
@@ -45,8 +55,35 @@ const NoteArea = (props) => {
       )}
 
       <Note />
-      {noteArea}
-      <Button
+
+      {/* {noteArea} */}
+
+      {/* {notes.map((note) => {
+        <Note
+          noteId={note.noteId}
+          noteHeader={note.noteHeader}
+          noteValue={note.noteValue}
+        />;
+      })} */}
+
+      <ul>
+        {notes.map((note) => {
+          return (
+            <li>
+              {note.noteHeader} {note.noteValue}{" "}
+              <button
+                onClick={() => {
+                  deleteThis(note.noteId);
+                }}
+              >
+                delete
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+
+      {/* <Button
         onClick={addBtnClicked}
         sx={{
           fontSize: 1,
@@ -56,13 +93,14 @@ const NoteArea = (props) => {
         }}
       >
         +
-      </Button>
+      </Button> */}
     </Box>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
+    notes: state.notes,
     mainHeader: selectMainHeader(state),
     isLoading: state.settings.isLoading,
   };
@@ -70,9 +108,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addNewNote: (noteId, noteHeader, noteValue) => {
-      dispatch(addNote(noteId, noteHeader, noteValue));
+    addEmpty: (noteId, noteHeader, noteValue) => {
+      dispatch(addEmptyNote(noteId, noteHeader, noteValue));
     },
+
+    deleteThis: (noteId) => {
+      dispatch(deleteNote(noteId));
+    },
+
     getNoteData: () => {
       dispatch(getDataConfigAction(() => {}));
     },

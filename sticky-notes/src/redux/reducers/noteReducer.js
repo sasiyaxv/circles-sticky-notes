@@ -5,8 +5,10 @@ import {
   GET_SETTINGS_ACTION,
   GET_SETTINGS_ACTION_SUCCESS,
   GET_SETTINGS_ACTION_FAIL,
+  ADD_EMPTY_NOTE_ACTION,
 } from "../actions/actionTypes";
 import { addNoteSaga } from "../sagas";
+import { v4 as uuidv4 } from "uuid";
 
 const initialState = [];
 
@@ -16,19 +18,25 @@ const initialValues = {
   isError: false,
 };
 
-// notes = [  {} , {},{  archivedNotes: [
-
-// ]} ]
-// notes[2]
-
 export function addNoteReducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_NOTE_ACTION:
-      const id = Math.random().toString(36).substr(2, 9);
+    case ADD_EMPTY_NOTE_ACTION:
+      const id = uuidv4();
       return [
         ...state,
         {
           noteId: id,
+          noteHeader: null,
+          noteValue: null,
+        },
+      ];
+
+    case ADD_NOTE_ACTION:
+      const newId = uuidv4();
+      return [
+        ...state,
+        {
+          noteId: newId,
           noteHeader: action.payload.noteHeader,
           noteValue: action.payload.noteValue,
         },
@@ -36,7 +44,15 @@ export function addNoteReducer(state = initialState, action) {
     case EDIT_NOTE_ACTION:
       return [];
     case DELETE_NOTE_ACTION:
-      return [state.filter((payload) => payload.noteId !== payload.noteId)];
+      // const removeId = action.payload;
+      return [
+        ...state,
+        state.filter((payload) => payload.noteId !== payload.noteId),
+      ];
+    // return {
+    //   ...state,
+    //   notes: state.notes.filter((item) => item.removeId !== removeId),
+    // };
     default:
       return state;
   }
