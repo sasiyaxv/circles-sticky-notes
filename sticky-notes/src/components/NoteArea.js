@@ -16,6 +16,10 @@ const NoteArea = (props) => {
 
   const [noteArea, setNoteArea] = useState([]);
 
+  // notes.map((note)=>{
+  //   <Note noteId={notes.noteId} noteTitle={notes.noteTitle} noteValue={notes.noteValue}/>
+  // })
+
   function addBtnClicked(e) {
     e.preventDefault();
     setNoteArea(noteArea.concat(<Note />));

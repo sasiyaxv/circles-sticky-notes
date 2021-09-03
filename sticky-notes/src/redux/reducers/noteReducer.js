@@ -6,6 +6,7 @@ import {
   GET_SETTINGS_ACTION_SUCCESS,
   GET_SETTINGS_ACTION_FAIL,
 } from "../actions/actionTypes";
+import { addNoteSaga } from "../sagas";
 
 const initialState = [];
 
@@ -15,13 +16,22 @@ const initialValues = {
   isError: false,
 };
 
+// notes = [  {} , {},{  archivedNotes: [
+
+// ]} ]
+// notes[2]
+
 export function addNoteReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_NOTE_ACTION:
       const id = Math.random().toString(36).substr(2, 9);
       return [
         ...state,
-        [id, action.payload.noteHeader, action.payload.noteValue],
+        {
+          noteId: id,
+          noteHeader: action.payload.noteHeader,
+          noteValue: action.payload.noteValue,
+        },
       ];
     case EDIT_NOTE_ACTION:
       return [];
