@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,700,900");
+
+.note-container {
+  background-color: lightblue;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.delete-button {
+  background-color: lightcoral;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.edit-button {
+  font-weight: bold;
+  margin-left: 20px;
+  margin-top: 30px;
+  cursor: pointer;
+}

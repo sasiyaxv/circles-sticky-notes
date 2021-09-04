@@ -4,30 +4,31 @@ import { Input, Textarea } from "@rebass/forms";
 import { connect } from "react-redux";
 
 import { RebassLabel } from "./RebassLabel";
-import { addNote, deleteNote, updateNote } from "../redux/actions";
+import { addNote } from "../redux/actions";
 
 const Note = (props) => {
-  console.log("PROPS", props);
-  // const { addNewNote, deleteNote, noteId } = props;
   const [noteHeader, setNoteHeader] = useState("");
   const [noteValue, setNoteValue] = useState("");
 
   function saveClicked(e) {
     e.preventDefault();
-    props.addNewNote(noteHeader, noteValue);
+    if (noteHeader === "" || noteValue === "") {
+      alert("empty fields");
+    } else {
+      props.addNewNote(noteHeader, noteValue);
+    }
   }
 
-  // function deleteClicked(e) {
-  //   e.preventDefault();
-  //   setNoteHeader("");
-  //   setNoteValue("");
-  //   props.deleteNote(props.noteId);
-  // }
+  function clearBtnClicked() {
+    setNoteHeader("");
+    setNoteValue("");
+  }
 
   return (
     <Box
+      textAlign={"center"}
       sx={{
-        borderWidth: "1px",
+        borderWidth: "2px",
         borderStyle: "solid",
         borderColor: "black",
         marginBottom: 3,
@@ -50,6 +51,9 @@ const Note = (props) => {
       />
       <RebassLabel value="Note" marginBottom={[2, 3, 4]} />
       <Textarea
+        sx={{
+          height: "90px",
+        }}
         value={noteValue}
         onChange={(e) => setNoteValue(e.target.value)}
       ></Textarea>
@@ -62,27 +66,18 @@ const Note = (props) => {
           margin: 1,
         }}
       >
-        Save note
+        + Add note
       </Button>
       <Button
+        onClick={clearBtnClicked}
         sx={{
           fontSize: 1,
           background: "black",
           margin: 1,
         }}
       >
-        Edit note
+        Clear
       </Button>
-      {/* <Button
-        onClick={deleteClicked}
-        sx={{
-          fontSize: 1,
-          background: "black",
-          margin: 1,
-        }}
-      >
-        Delete
-      </Button> */}
     </Box>
   );
 };
@@ -97,12 +92,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addNewNote: (noteId, noteHeader, noteValue) => {
       dispatch(addNote(noteId, noteHeader, noteValue));
-    },
-    // deleteNote: (noteId) => {
-    //   dispatch(deleteNote(noteId));
-    // },
-    editNote: (noteId, noteHeader, noteValue) => {
-      dispatch(updateNote(noteId, noteHeader, noteValue));
     },
   };
 };

@@ -7,7 +7,6 @@ import {
   GET_SETTINGS_ACTION_FAIL,
   ADD_EMPTY_NOTE_ACTION,
 } from "../actions/actionTypes";
-import { addNoteSaga } from "../sagas";
 import { v4 as uuidv4 } from "uuid";
 
 const initialState = [];
@@ -42,12 +41,20 @@ export function addNoteReducer(state = initialState, action) {
         },
       ];
     case EDIT_NOTE_ACTION:
-      return [];
-    case DELETE_NOTE_ACTION:
-      // const removeId = payload.noteId;
-      // console.log(payload);
-      return state.filter((notes) => notes.noteId !== action.noteId);
+      const index = state.filter(
+        (note) => note.noteId == action.payload.noteId
+      );
 
+      // console.log(index[0])
+      // const newArray = [...state];
+      // console.log("NEWARRAY", newArray);
+      // // newArray[index.noteId] = action.payload.note;
+
+      // console.log("OLDNOTE", index);
+      return [];
+
+    case DELETE_NOTE_ACTION:
+      return state.filter((notes) => notes.noteId !== action.noteId);
     default:
       return state;
   }

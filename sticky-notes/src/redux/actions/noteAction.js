@@ -28,19 +28,19 @@ export function addNote(noteHeader, noteValue) {
   };
 }
 
-export function updateNote(noteId, noteHeader, note) {
+export function updateNote(noteId, noteHeader, noteValue) {
+  console.log("NOTENEWVALUES", noteId, noteHeader, noteValue);
   return {
     type: EDIT_NOTE_ACTION,
     payload: {
       noteId,
       noteHeader,
-      note,
+      noteValue,
     },
   };
 }
 
 export function deleteNote(noteId) {
-  console.log("NOTEID", noteId);
   return {
     type: DELETE_NOTE_ACTION,
     noteId,

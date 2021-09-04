@@ -1,40 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Box, Button } from "rebass";
+import React, { useEffect } from "react";
+import { Box } from "rebass";
 import Note from "./Note";
 import { RebassHeading } from "./RebassHeading";
 import { connect } from "react-redux";
-import {
-  addNote,
-  editNote,
-  deleteNote,
-  getDataConfigAction,
-  addEmptyNote,
-} from "../redux/actions";
+import { getDataConfigAction } from "../redux/actions";
 import { selectMainHeader } from "../redux/selectors/noteSelectors";
-import { AddedNote } from "./AddedNote";
 import NoteList from "./NoteList";
 
 const NoteArea = (props) => {
-  const { mainHeader, getNoteData, isLoading, notes, addEmpty, deleteThis } =
-    props;
-
-  console.log("NOTES", notes);
-
-  const [noteArea, setNoteArea] = useState([]);
-
-  // notes.map((note)=>{
-  //   <Note noteId={notes.noteId} noteTitle={notes.noteTitle} noteValue={notes.noteValue}/>
-  // })
-
-  function addBtnClicked(e) {
-    e.preventDefault();
-    addEmpty();
-    setNoteArea(noteArea.concat(<Note />));
-  }
-
-  function deleteBtnClicked(noteId) {
-    deleteThis(noteId);
-  }
+  const { getNoteData, isLoading } = props;
 
   // fetch initial data
   useEffect(() => {
@@ -42,10 +16,11 @@ const NoteArea = (props) => {
   }, []);
 
   return (
-    <Box>
+    <Box textAlign={"center"}>
       {!isLoading ? (
         <>
           <RebassHeading
+            fontFamily={"Poppins"}
             value={"Add your Notes"}
             marginBottom={[2, 3, 4]}
             fontSize={[5, 6, 7]}
@@ -54,43 +29,8 @@ const NoteArea = (props) => {
       ) : (
         "loading..."
       )}
-
       <Note />
-
-      {/* {noteArea} */}
-
-      {/* {notes.map((note) => {
-        <Note
-          noteId={note.noteId}
-          noteHeader={note.noteHeader}
-          noteValue={note.noteValue}
-        />;
-      })} */}
-
       <NoteList />
-
-      {/* <ul>
-        {notes.map((note) => {
-          return (
-            <li>
-              {note.noteHeader} {note.noteValue}
-              <button onClick={deleteBtnClicked}>delete</button>
-            </li>
-          );
-        })}
-      </ul> */}
-
-      {/* <Button
-        onClick={addBtnClicked}
-        sx={{
-          fontSize: 1,
-          background: "black",
-          margin: 2,
-          textAlign: "right",
-        }}
-      >
-        +
-      </Button> */}
     </Box>
   );
 };
@@ -105,14 +45,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addEmpty: (noteId, noteHeader, noteValue) => {
-      dispatch(addEmptyNote(noteId, noteHeader, noteValue));
-    },
-
-    deleteThis: (noteId) => {
-      dispatch(deleteNote(noteId));
-    },
-
     getNoteData: () => {
       dispatch(getDataConfigAction(() => {}));
     },
