@@ -5,7 +5,6 @@ import {
   GET_SETTINGS_ACTION,
   GET_SETTINGS_ACTION_SUCCESS,
   GET_SETTINGS_ACTION_FAIL,
-  ADD_EMPTY_NOTE_ACTION,
 } from "../actions/actionTypes";
 import { v4 as uuidv4 } from "uuid";
 
@@ -19,17 +18,6 @@ const initialValues = {
 
 export function addNoteReducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_EMPTY_NOTE_ACTION:
-      const id = uuidv4();
-      return [
-        ...state,
-        {
-          noteId: id,
-          noteHeader: null,
-          noteValue: null,
-        },
-      ];
-
     case ADD_NOTE_ACTION:
       const newId = uuidv4();
       return [
@@ -42,7 +30,7 @@ export function addNoteReducer(state = initialState, action) {
       ];
     case EDIT_NOTE_ACTION:
       const index = state.filter(
-        (note) => note.noteId == action.payload.noteId
+        (note) => note.noteId === action.payload.noteId
       );
 
       // console.log(index[0])

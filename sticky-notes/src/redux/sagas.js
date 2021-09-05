@@ -9,8 +9,6 @@ import {
   GET_SETTINGS_ACTION,
   GET_SETTINGS_ACTION_SUCCESS,
   GET_SETTINGS_ACTION_FAIL,
-  ADD_EMPTY_NOTE_ACTION,
-  ADD_EMPTY_NOTE_ACTION_SUCCESS,
 } from "./actions/actionTypes";
 import {
   createNote,
@@ -30,18 +28,6 @@ export function* getSettingsSaga() {
   } catch (e) {}
 }
 
-export function* addEmptyNoteSaga({ payload }) {
-  try {
-    const note = yield call(
-      createNote,
-      payload.noteId,
-      payload.noteHeader,
-      payload.noteValue
-    );
-    yield put({ type: ADD_EMPTY_NOTE_ACTION_SUCCESS, payload: note });
-  } catch (e) {}
-}
-
 export function* addNoteSaga({ payload }) {
   try {
     const note = yield call(
@@ -50,8 +36,10 @@ export function* addNoteSaga({ payload }) {
       payload.noteHeader,
       payload.noteValue
     );
-    yield put({ type: ADD_EMPTY_NOTE_ACTION_SUCCESS, payload: note });
-  } catch (e) {}
+    yield put({ type: ADD_NOTE_ACTION_SUCCESS, payload: note });
+  } catch (e) {
+    console.log("Error occurred ", e.message);
+  }
 }
 
 export function* editNoteSaga({ payload }) {
@@ -63,14 +51,18 @@ export function* editNoteSaga({ payload }) {
       payload.noteValue
     );
     yield put({ type: EDIT_NOTE_ACTION_SUCCESS, payload: note });
-  } catch (e) {}
+  } catch (e) {
+    console.log("Error occurred ", e.message);
+  }
 }
 
 export function* deleteNoteSaga({ payload }) {
   try {
     const note = yield call(deleteNote, payload.noteId);
     yield put({ type: DELETE_NOTE_ACTION_SUCCESS, payload: note });
-  } catch (e) {}
+  } catch (e) {
+    console.log("Error occurred ", e.message);
+  }
 }
 
 export function* mySaga() {
@@ -78,5 +70,4 @@ export function* mySaga() {
   yield takeLatest(ADD_NOTE_ACTION, addNoteSaga);
   yield takeLatest(EDIT_NOTE_ACTION, editNoteSaga);
   yield takeLatest(DELETE_NOTE_ACTION, deleteNoteSaga);
-  yield takeLatest(ADD_EMPTY_NOTE_ACTION, addEmptyNoteSaga);
 }

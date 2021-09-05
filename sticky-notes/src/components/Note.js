@@ -28,6 +28,8 @@ const Note = (props) => {
     <Box
       textAlign={"center"}
       sx={{
+        marginLeft: "300px",
+        marginRight: "300px",
         borderWidth: "2px",
         borderStyle: "solid",
         borderColor: "black",
@@ -40,8 +42,6 @@ const Note = (props) => {
 
       <Input
         sx={{
-          borderWidth: "1px",
-          borderStyle: "solid",
           borderColor: "black",
           marginBottom: 3,
           marginTop: 2,

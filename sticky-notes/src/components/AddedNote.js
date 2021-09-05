@@ -13,14 +13,14 @@ const AddedNote = (props) => {
         placeholder={props.noteHeader}
         value={noteHeader}
         onChange={(e) => setNoteHeader(e.target.value)}
-      ></input>{" "}
+      />
       <br />
       <input
         className="input-field"
         placeholder={props.noteValue}
         value={noteValue}
         onChange={(e) => setNoteValue(e.target.value)}
-      ></input>{" "}
+      />
       <br />
       <button
         className="edit-button"

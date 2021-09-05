@@ -7,6 +7,7 @@ function NoteList(props) {
     <div className="note-list">
       {props.notes.map((note) => (
         <AddedNote
+          key={note.noteId}
           noteId={note.noteId}
           noteHeader={note.noteHeader}
           noteValue={note.noteValue}
