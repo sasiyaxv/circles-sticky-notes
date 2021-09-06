@@ -25,6 +25,7 @@ const NewNoteList = (props) => {
               noteDate={note.noteDate}
             />
           ))}
+          {/* Test */}
           {/* {currentActiveNotes.map((note) => (
             <div
               className={`app-sidebar-note ${
