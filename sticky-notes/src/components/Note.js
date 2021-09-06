@@ -16,6 +16,8 @@ const Note = (props) => {
       alert("empty fields");
     } else {
       props.addNewNote(noteHeader, noteValue);
+      setNoteHeader("");
+      setNoteValue("");
     }
   }
 
