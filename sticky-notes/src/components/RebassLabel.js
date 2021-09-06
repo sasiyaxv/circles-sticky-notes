@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "rebass";
 
-export const RebassLabel = ({ value }) => {
-  return <Text>{value}</Text>;
+export const RebassLabel = ({ value, marginBottom }) => {
+  return <Text mb={marginBottom}>{value}</Text>;
 };

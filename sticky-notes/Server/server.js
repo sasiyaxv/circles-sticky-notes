@@ -7,14 +7,14 @@ const app = express();
 app.use(cors(), express.urlencoded({ extended: false }));
 
 // CDD
-// app.get("/appsettings", async (req, res) => {
-//   await sleep(1000);
-//   res.json({
-//     noteBoard: {
-//       mainHeader: " Ready to Take a Challenge",
-//     },
-//   });
-// });
+app.get("/appsettings", async (req, res) => {
+  await sleep(1000);
+  res.json({
+    noteBoard: {
+      mainHeader: "Add your notes",
+    },
+  });
+});
 
 app.post("/addnote", function (req, res) {
   const noteId = req.body.noteId;
