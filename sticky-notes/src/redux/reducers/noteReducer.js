@@ -29,17 +29,12 @@ export function addNoteReducer(state = initialState, action) {
         },
       ];
     case EDIT_NOTE_ACTION:
-      const index = state.filter(
+      const noteIndex = state.findIndex(
         (note) => note.noteId === action.payload.noteId
       );
-
-      // console.log(index[0])
-      // const newArray = [...state];
-      // console.log("NEWARRAY", newArray);
-      // // newArray[index.noteId] = action.payload.note;
-
-      // console.log("OLDNOTE", index);
-      return [];
+      let notes = [...state];
+      notes[noteIndex] = action.payload;
+      return notes;
 
     case DELETE_NOTE_ACTION:
       return state.filter((notes) => notes.noteId !== action.noteId);

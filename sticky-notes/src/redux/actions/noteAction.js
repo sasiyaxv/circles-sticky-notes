@@ -18,7 +18,6 @@ export function addNote(noteHeader, noteValue) {
 }
 
 export function updateNote(noteId, noteHeader, noteValue) {
-  console.log("NOTENEWVALUES", noteId, noteHeader, noteValue);
   return {
     type: EDIT_NOTE_ACTION,
     payload: {
