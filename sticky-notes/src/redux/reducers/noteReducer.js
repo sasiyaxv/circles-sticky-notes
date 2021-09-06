@@ -19,11 +19,15 @@ const initialValues = {
 export function addNoteReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_NOTE_ACTION:
+      let newDate = new Date();
+      let dateTime = newDate.toLocaleDateString();
+      console.log("DATE", dateTime);
       const newId = uuidv4();
       return [
         ...state,
         {
           noteId: newId,
+          noteDate: dateTime,
           noteHeader: action.payload.noteHeader,
           noteValue: action.payload.noteValue,
         },
