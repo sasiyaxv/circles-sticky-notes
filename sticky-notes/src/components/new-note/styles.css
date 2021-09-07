@@ -1,23 +1,10 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 
-.main-container {
-}
-.note-list {
-  float: left;
-  height: 60%;
-  width: 40%;
-}
-
-.note-values {
-  float: right;
-  height: 60%;
-  width: 60%;
-}
-
 /* SIDEBAR STYLES */
 
 .app-sidebar {
+  float: left;
   background-color: #fff;
   width: 30%;
   height: 95vh;
@@ -26,7 +13,7 @@
   padding: var(--top-padding) 30px;
 }
 
-.app-sidebar-header {
+/* .app-sidebar-header {
   display: flex;
   position: relative;
   padding: 25px 0;
@@ -138,4 +125,10 @@
 
 .app-sidebar-note.active .sidebar-note-title {
   color: black;
+} */
+
+.note-value-container {
+  float: right;
+  height: 60%;
+  width: 60%;
 }
