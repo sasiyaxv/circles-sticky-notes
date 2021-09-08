@@ -1,21 +1,25 @@
+import { useState } from "react";
 import { connect } from "react-redux";
 import { addNote, updateNote } from "../../redux/actions";
 
-const Main = ({ activeNote, onUpdateNote, addNewNote, edit, noteId }) => {
+const Main = ({ activeNote, onUpdateNote, edit, noteId }) => {
+  console.log("NEWACTIVE", activeNote);
+  const [noteHeader, setNoteHeader] = useState("");
+  const [noteValue, setNoteValue] = useState("");
   function updateNote() {
     console.log("ADD");
-    edit(noteId, activeNote.title, activeNote.body);
+    edit(activeNote, noteHeader, noteValue);
   }
-  const onEditField = (key, value) => {
-    onUpdateNote({
-      ...activeNote,
-      [key]: value,
-      lastModified: Date.now(),
-    });
-  };
+  // const onEditField = (key, value) => {
+  //   onUpdateNote({
+  //     ...activeNote,
+  //     [key]: value,
+  //     lastModified: Date.now(),
+  //   });
+  // };
 
-  if (!activeNote)
-    return <div className="no-active-note">No note selected</div>;
+  // if (!activeNote)
+  //   return <div className="no-active-note">No note selected</div>;
   return (
     <div className="app-main">
       <div className="app-main-note-edit">
@@ -23,15 +27,15 @@ const Main = ({ activeNote, onUpdateNote, addNewNote, edit, noteId }) => {
           type="text"
           id="title"
           placeholder="Title"
-          value={activeNote.title}
-          onChange={(e) => onEditField("title", e.target.value)}
+          value={noteHeader}
+          onChange={(e) => setNoteHeader(e.target.value)}
           autoFocus
         />
         <textarea
           id="body"
           placeholder="Write your note here..."
-          value={activeNote.body}
-          onChange={(e) => onEditField("body", e.target.value)}
+          value={noteValue}
+          onChange={(e) => setNoteValue(e.target.value)}
         />
         <button onClick={updateNote}>Update</button>
       </div>
@@ -42,6 +46,7 @@ const Main = ({ activeNote, onUpdateNote, addNewNote, edit, noteId }) => {
 const mapStateToProps = (state) => {
   return {
     noteId: state.notes.noteId,
+    notes: state.notes,
   };
 };
 

@@ -12,30 +12,40 @@ const newNote = () => {
 
 function App(props) {
   const [notes, setNotes] = useState([]);
-  const [filterednotes, setFilteredNotes] = useState([]);
-  const [activeNote, setActiveNote] = useState(false);
+
+  const [activeNote, setActiveNote] = useState("");
 
   // Add a new note
   const onAddNote = () => {
     // update the list of notes
     props.addNewNote("", "");
-    setNotes([newNote(), ...notes]);
+    // setNotes([newNote(), ...notes]);
   };
+
+  // const onUpdateNote = (updatedNote) => {
+  //   const updatedNotesArray = notes.map((note) => {
+  //     if (note.noteId === activeNote) {
+  //       return updatedNote;
+  //     }
+  //     return note;
+  //   });
+
+  //   setNotes(updatedNotesArray);
+  // };
 
   const onUpdateNote = (updatedNote) => {
-    const updatedNotesArray = notes.map((note) => {
-      if (note.id === activeNote) {
-        return updatedNote;
-      }
-      return note;
-    });
-
-    setNotes(updatedNotesArray);
+    // const updatedNotesArray = notes.map((note) => {
+    //   if (note.id === activeNote) {
+    //     return updatedNote;
+    //   }
+    //   return note;
+    // });
+    // setNotes(updatedNotesArray);
   };
 
-  const onDeleteNote = (idToDelete) => {
-    setNotes(notes.filter((note) => note.id !== idToDelete));
-  };
+  // const onDeleteNote = (idToDelete) => {
+  //   setNotes(notes.filter((note) => note.id !== idToDelete));
+  // };
 
   const getActiveNote = () => {
     return notes.find((note) => note.id === activeNote);
@@ -47,13 +57,14 @@ function App(props) {
         notes={notes}
         setNotes={setNotes}
         onAddNote={onAddNote}
-        onDeleteNote={onDeleteNote}
+        // onDeleteNote={onDeleteNote}
+
         activeNote={activeNote}
         setActiveNote={setActiveNote}
-        filterednotes={filterednotes}
-        setFilteredNotes={setFilteredNotes}
       />
-      <Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote} />
+      <Main activeNote={activeNote} onUpdateNote={onUpdateNote} />
+      {activeNote}
+      {/* onUpdateNote={onUpdateNote} */}
     </div>
   );
 }
@@ -61,6 +72,7 @@ function App(props) {
 const mapStateToProps = (state) => {
   return {
     noteId: state.notes.noteId,
+    notes: state.notes,
   };
 };
 

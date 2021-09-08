@@ -4,23 +4,22 @@ import { useState } from "react";
 import { connect } from "react-redux";
 import { deleteNote } from "../../redux/actions";
 
-const Sidebar = ({
-  notes,
-  remove,
-  filterednotes,
-  setFilteredNotes,
-  onAddNote,
-  onDeleteNote,
-  activeNote,
-  setActiveNote,
-}) => {
-  function deleteClicked() {
-    console.log("DELETE");
+const Sidebar = ({ notes, remove, onAddNote, activeNote, setActiveNote }) => {
+  // function deleteClicked() {
+  //   console.log("DELETE");
+  // }
+
+  // const [input, setInput] = useState("");
+
+  const [clickedNote, setClickedNote] = useState("");
+
+  function noteClicked(id) {
+    console.log("ID", id);
+    setClickedNote(id);
+    // console.log("NOTECLICKED", clickedNote);
   }
 
-  const [input, setInput] = useState("");
-
-  const currentActiveNotes = input ? filterednotes : notes;
+  // const currentActiveNotes = input ? filterednotes : notes;
 
   console.log("NOTES", notes);
 
@@ -36,9 +35,11 @@ const Sidebar = ({
       <div className="app-sidebar-notes">
         {notes.map((note) => (
           <div
-            className={`app-sidebar-note ${note.id === activeNote && "active"}`}
-            onClick={() => setActiveNote(note.id)}
+            className="app-sidebar-note"
+            onClick={() => setActiveNote(note.noteId)}
+            // onClick={() => noteClicked(note.noteId)}
           >
+            <p>{note.noteId}</p>
             <DeleteIcon
               className="sidebar-note-delete"
               onClick={() => remove(note.noteId)}
@@ -47,10 +48,11 @@ const Sidebar = ({
               <strong>{note.title}</strong>
             </div>
             <small className="note-meta">
-              {new Date(note.lastModified).toLocaleDateString("en-GB", {
+              {/* {new Date(note.lastModified).toLocaleDateString("en-GB", {
                 hour: "2-digit",
                 minute: "2-digit",
-              })}
+              })} */}
+              {note.noteDate}
             </small>
           </div>
         ))}
@@ -60,7 +62,7 @@ const Sidebar = ({
 };
 const mapStateToProps = (state) => {
   return {
-    //   notes: state.notes,
+    notes: state.notes,
     //   mainHeader: selectMainHeader(state),
     //   isLoading: state.settings.isLoading,
   };
