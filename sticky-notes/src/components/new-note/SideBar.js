@@ -1,27 +1,13 @@
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { useState } from "react";
 import { connect } from "react-redux";
+
+import date from "date-and-time";
+
 import { deleteNote } from "../../redux/actions";
 
 const Sidebar = ({ notes, remove, onAddNote, activeNote, setActiveNote }) => {
-  // function deleteClicked() {
-  //   console.log("DELETE");
-  // }
-
-  // const [input, setInput] = useState("");
-
-  const [clickedNote, setClickedNote] = useState("");
-
-  function noteClicked(id) {
-    console.log("ID", id);
-    setClickedNote(id);
-    // console.log("NOTECLICKED", clickedNote);
-  }
-
-  // const currentActiveNotes = input ? filterednotes : notes;
-
-  console.log("NOTES", notes);
+  const now = new Date();
 
   return (
     <div className="app-sidebar">
@@ -35,24 +21,22 @@ const Sidebar = ({ notes, remove, onAddNote, activeNote, setActiveNote }) => {
       <div className="app-sidebar-notes">
         {notes.map((note) => (
           <div
+            key={note.noteId}
             className="app-sidebar-note"
-            onClick={() => setActiveNote(note.noteId)}
-            // onClick={() => noteClicked(note.noteId)}
+            className={`app-sidebar-note ${
+              note.noteId === activeNote.noteId && "active"
+            }`}
+            onClick={() => setActiveNote(note)}
           >
-            <p>{note.noteId}</p>
             <DeleteIcon
               className="sidebar-note-delete"
               onClick={() => remove(note.noteId)}
             />
             <div className="sidebar-note-title">
-              <strong>{note.title}</strong>
+              <strong>{note.noteHeader}</strong>
             </div>
             <small className="note-meta">
-              {/* {new Date(note.lastModified).toLocaleDateString("en-GB", {
-                hour: "2-digit",
-                minute: "2-digit",
-              })} */}
-              {note.noteDate}
+              {date.format(now, "ddd, MMM DD YYYY")}
             </small>
           </div>
         ))}
@@ -63,8 +47,6 @@ const Sidebar = ({ notes, remove, onAddNote, activeNote, setActiveNote }) => {
 const mapStateToProps = (state) => {
   return {
     notes: state.notes,
-    //   mainHeader: selectMainHeader(state),
-    //   isLoading: state.settings.isLoading,
   };
 };
 

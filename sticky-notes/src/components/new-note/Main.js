@@ -1,25 +1,31 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-import { addNote, updateNote } from "../../redux/actions";
 
-const Main = ({ activeNote, onUpdateNote, edit, noteId }) => {
-  console.log("NEWACTIVE", activeNote);
+import { updateNote } from "../../redux/actions";
+
+import "./App.css";
+
+const Main = ({ activeNote, edit, setActiveNote }) => {
   const [noteHeader, setNoteHeader] = useState("");
   const [noteValue, setNoteValue] = useState("");
-  function updateNote() {
-    console.log("ADD");
-    edit(activeNote, noteHeader, noteValue);
-  }
-  // const onEditField = (key, value) => {
-  //   onUpdateNote({
-  //     ...activeNote,
-  //     [key]: value,
-  //     lastModified: Date.now(),
-  //   });
-  // };
 
-  // if (!activeNote)
-  //   return <div className="no-active-note">No note selected</div>;
+  function updateNote() {
+    edit(activeNote.noteId, noteHeader, noteValue);
+
+    setNoteHeader("");
+    setNoteValue("");
+
+    // setting active note to false
+    setActiveNote(false);
+  }
+  // Clear button
+  function clearNote() {
+    setNoteHeader("");
+    setNoteValue("");
+  }
+
+  if (!activeNote)
+    return <div className="no-active-note">No note selected</div>;
   return (
     <div className="app-main">
       <div className="app-main-note-edit">
@@ -37,7 +43,19 @@ const Main = ({ activeNote, onUpdateNote, edit, noteId }) => {
           value={noteValue}
           onChange={(e) => setNoteValue(e.target.value)}
         />
-        <button onClick={updateNote}>Update</button>
+        <button onClick={updateNote} className="update-note-button">
+          Update
+        </button>
+        <button onClick={clearNote} className="clear-note-button">
+          Clear
+        </button>
+      </div>
+      <div>
+        <h3>Title</h3>
+        {activeNote.noteHeader}
+        <br />
+        <h3>Value</h3>
+        {activeNote.noteValue}
       </div>
     </div>
   );
@@ -52,9 +70,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addNewNote: (noteId, noteHeader, noteValue) => {
-      dispatch(addNote(noteId, noteHeader, noteValue));
-    },
     edit: (noteId, noteHeader, noteValue) =>
       dispatch(updateNote(noteId, noteHeader, noteValue)),
   };

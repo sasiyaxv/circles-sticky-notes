@@ -163,7 +163,7 @@ body {
 
 .app-main-note-edit,
 .app-main-note-preview {
-  height: 47vh;
+  height: 50vh;
   border-radius: 30px;
   margin-left: 20px;
   margin-bottom: 10px;
@@ -219,4 +219,19 @@ textarea {
   padding: 0 45px 45px 45px;
   font-size: 1rem;
   line-height: 2rem;
+}
+
+.update-note-button {
+  margin-bottom: 50px;
+  font-family: "poppins";
+  height: 40px;
+  cursor: pointer;
+}
+
+.clear-note-button {
+  margin-bottom: 50px;
+  margin-left: 30px;
+  font-family: "poppins";
+  height: 40px;
+  cursor: pointer;
 }
