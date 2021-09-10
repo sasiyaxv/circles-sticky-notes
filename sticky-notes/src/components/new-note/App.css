@@ -164,10 +164,11 @@ body {
 
 .app-main-note-edit,
 .app-main-note-preview {
-  height: 50vh;
+  height: 55vh;
   border-radius: 30px;
   margin-left: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
+  padding-bottom: 50px;
 }
 
 .no-active-note {
@@ -183,6 +184,7 @@ body {
 .app-main-note-edit {
   padding: 25px;
   background-color: var(--red-color);
+  padding-bottom: 30px;
 }
 
 .app-main-note-edit input,
@@ -214,16 +216,6 @@ textarea:focus {
 }
 
 /* Preview */
-.app-main-note-preview {
-  border-top: 1px solid #ddd;
-  overflow-y: scroll;
-  background-color: #fff;
-}
-
-.preview-title {
-  padding: 45px 45px 0 45px;
-  margin: 0;
-}
 
 .update-note-button {
   margin-bottom: 50px;
