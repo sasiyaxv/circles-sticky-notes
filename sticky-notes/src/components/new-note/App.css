@@ -120,7 +120,8 @@ body {
 }
 
 .sidebar-note-title {
-  display: flex;
+  text-align: center;
+
   justify-content: space-between;
   color: #999;
 }
@@ -198,9 +199,18 @@ textarea {
   border-radius: 15px;
 }
 
+.app-main-note-edit input,
+textarea:focus {
+  outline: none;
+}
+
 .app-main-note-edit input {
   height: 50px;
   font-size: 1.5rem;
+}
+
+.app-main-note-edit input:focus {
+  outline: none;
 }
 
 /* Preview */
@@ -213,12 +223,6 @@ textarea {
 .preview-title {
   padding: 45px 45px 0 45px;
   margin: 0;
-}
-
-.markdown-preview {
-  padding: 0 45px 45px 45px;
-  font-size: 1rem;
-  line-height: 2rem;
 }
 
 .update-note-button {
@@ -234,4 +238,12 @@ textarea {
   font-family: "poppins";
   height: 40px;
   cursor: pointer;
+}
+
+.note-saved-values {
+  border: 20px solid var(--red-color);
+  border-radius: 15px;
+  font-family: "poppins";
+  margin-left: 16px;
+  padding-bottom: 10px;
 }

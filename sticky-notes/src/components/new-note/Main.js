@@ -50,7 +50,7 @@ const Main = ({ activeNote, edit, setActiveNote }) => {
           Clear
         </button>
       </div>
-      <div>
+      <div className="note-saved-values">
         <h3>Title</h3>
         {activeNote.noteHeader}
         <br />
